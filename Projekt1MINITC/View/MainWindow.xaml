@@ -38,10 +38,17 @@
                       Grid.Column="0"
                       Grid.Row="0"
                       DriveComboSource="{Binding LeftPanel.Drives, Mode=TwoWay}"
+                      DriveComboSelection="{Binding LeftPanel.SelectedDrive, Mode=TwoWay}"
+                      TextPath="{Binding LeftPanel.Sciezka, Mode=TwoWay}"
+                      ListBoxSource="{Binding LeftPanel.Folders, Mode=TwoWay}"
+                      ListBoxSelection="{Binding LeftPanel.SelectedFolder, Mode=TwoWay}"
                       >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="DriveComboBox">
                     <i:InvokeCommandAction Command="{Binding LeftPanel.ComboBoxClick}"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="ListBoxDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding LeftPanel.ListBoxDClick}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             
@@ -50,7 +57,20 @@
         <view:PanelTC x:Name="RightPanel"
                       Grid.Column="1"
                       Grid.Row="0"
+                      DriveComboSource="{Binding RightPanel.Drives, Mode=TwoWay}"
+                      DriveComboSelection="{Binding RightPanel.SelectedDrive, Mode=TwoWay}"
+                      TextPath="{Binding RightPanel.Sciezka, Mode=TwoWay}"
+                      ListBoxSource="{Binding RightPanel.Folders, Mode=TwoWay}"
+                      ListBoxSelection="{Binding RightPanel.SelectedFolder, Mode=TwoWay}"
                       >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="DriveComboBox">
+                    <i:InvokeCommandAction Command="{Binding RightPanel.ComboBoxClick}"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="ListBoxDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding RightPanel.ListBoxDClick}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
 
 
         </view:PanelTC>
