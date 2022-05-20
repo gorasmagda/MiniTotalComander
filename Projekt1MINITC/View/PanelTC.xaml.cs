@@ -85,10 +85,6 @@ namespace Projekt1MINITC.View
             set { SetValue(TextPathProperty, value); }
         }
 
-
-
-        //LISTBOX TO DOOOOOOO 
-
         //Properties
         public static readonly DependencyProperty ListBoxSourceProperty =
             DependencyProperty.Register(
@@ -117,11 +113,27 @@ namespace Projekt1MINITC.View
         }
 
         //Events 
+        public static readonly RoutedEvent ListBoxDoubleClickEvent =
+        EventManager.RegisterRoutedEvent(nameof(ListBoxDoubleClick),
+                     RoutingStrategy.Bubble, typeof(RoutedEventHandler),
+                     typeof(PanelTC));
 
+        public event RoutedEventHandler ListBoxDoubleClick
+        {
+            add { AddHandler(ListBoxDoubleClickEvent, value); }
+            remove { RemoveHandler(ListBoxDoubleClickEvent, value); }
+        }
+
+        //Raising 
+        void Raise_file_ListBox_MouseDoubleClick()
+        {
+            RoutedEventArgs newEventArgs = new RoutedEventArgs(PanelTC.ListBoxDoubleClickEvent);
+            RaiseEvent(newEventArgs);
+        }
 
         private void file_ListBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-
+            Raise_file_ListBox_MouseDoubleClick();
         }
 
 
