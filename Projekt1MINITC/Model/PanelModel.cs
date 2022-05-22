@@ -43,25 +43,25 @@ namespace Projekt1MINITC.Model
             List<string> folders = new List<string>();
             if (Sciezka != null)
             {
-                
+
                 //zwraca kolekcję pełnych ścieżek do podfolderów w danej lokalizacji 
                 string[] folderlist = Directory.GetDirectories(Sciezka);
                 //zwraca kolekcję pełnych ścieżek do plików zawartych w danej lokalizacji
                 string[] filelist = Directory.GetFiles(Sciezka);
                 if (Sciezka.Length > 3)
                 {
-                   folders.Add("..");
+                    folders.Add("..");
                 }
                 foreach (string f in folderlist)
                 {
-                  folders.Add("<D>" + Path.GetFileName(f));
+                    folders.Add("<D>" + Path.GetFileName(f));
                 }
                 foreach (string file in filelist)
                 {
-                   folders.Add(Path.GetFileName(file));
+                    folders.Add(Path.GetFileName(file));
                 }
 
-                }
+            }    
             return folders;
                 
                     
