@@ -16,12 +16,14 @@ namespace Projekt1MINITC.ViewModel
         
         public ObservableCollection<string> Drives { get; set; }
         public ObservableCollection<string> Folders { get; set; }
+        public PanelModel PanelM = null;
 
 
         public PanelViewModel()
         {
             Drives = new ObservableCollection<string>();
             Folders = new ObservableCollection<string>();
+            PanelM = new PanelModel();
         }
 
 
@@ -75,6 +77,7 @@ namespace Projekt1MINITC.ViewModel
                         //zwraca ścieżkę do elementu, który wskzazuje ()
                         Sciezka = Path.GetDirectoryName(Path.GetDirectoryName(Sciezka));
                     }
+                    
                     OnPropertyChanged(nameof(Sciezka));
                 }
 
@@ -103,10 +106,10 @@ namespace Projekt1MINITC.ViewModel
             {
                 Drives.Clear();
                 //zwraca kolejkcję dysków ligicznych
-                string[] drives = Directory.GetLogicalDrives();
-
-                foreach (var x in drives)
+                List<string> drives = PanelM.readDrives();
+                foreach (string x in drives)
                     Drives.Add(x);
+
 
             }
             , null));
