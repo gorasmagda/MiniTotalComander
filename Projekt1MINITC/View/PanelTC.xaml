@@ -13,7 +13,7 @@
     </UserControl.Resources>
     
     
-    <Grid Background="LightBlue">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
@@ -64,7 +64,6 @@
                   VerticalAlignment="Center"
                   HorizontalContentAlignment="Left"
                   VerticalContentAlignment="Center"
-                  Background="LightGray"
                   Margin="65,0,18,0"
                   Height="22"
                   FontSize="10"
@@ -76,7 +75,6 @@
         <!--PANEL LISTBOX-->
         <ListBox x:Name="file_ListBox"
                  Grid.Row="2"
-                 Background="LightGray"
                  Margin="10 10 10 10"
                  ItemsSource="{Binding ListBoxSource, RelativeSource={
                                                     RelativeSource AncestorType={x:Type UserControl},

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projekt1MINITC.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -16,25 +17,13 @@ namespace Projekt1MINITC.ViewModel
         public ObservableCollection<string> Drives { get; set; }
         public ObservableCollection<string> Folders { get; set; }
 
+
         public PanelViewModel()
         {
             Drives = new ObservableCollection<string>();
             Folders = new ObservableCollection<string>();
         }
 
-        private ICommand comboBoxClick;
-
-        public ICommand ComboBoxClick => comboBoxClick ?? (comboBoxClick = new RelayCommand
-            (o =>
-            {
-                Drives.Clear();
-                string[] drives = Directory.GetLogicalDrives();
-               
-                foreach (var x in drives)
-                  Drives.Add(x);
-                
-            }
-            , null));
 
         private string selectedDrive;
         public string SelectedDrive
@@ -62,7 +51,9 @@ namespace Projekt1MINITC.ViewModel
                 {
                     try
                     {
+                        //zwraca kolekcję pełnych ścieżek do podfolderów w danej lokalizacji 
                         string[] folderlist = Directory.GetDirectories(Sciezka);
+                        //zwraca kolekcję pełnych ścieżek do plików zawartych w danej lokalizacji
                         string[] filelist = Directory.GetFiles(Sciezka);
                         if(Sciezka.Length > 3)
                         {
@@ -81,6 +72,7 @@ namespace Projekt1MINITC.ViewModel
                     catch
                     {
                         Console.WriteLine("ERROR!");
+                        //zwraca ścieżkę do elementu, który wskzazuje ()
                         Sciezka = Path.GetDirectoryName(Path.GetDirectoryName(Sciezka));
                     }
                     OnPropertyChanged(nameof(Sciezka));
@@ -101,11 +93,33 @@ namespace Projekt1MINITC.ViewModel
             }
         }
 
-        //ListBoxDoubleClick
+
+
+        //DriveComboBoxEvent
+        private ICommand comboBoxClick;
+
+        public ICommand ComboBoxClick => comboBoxClick ?? (comboBoxClick = new RelayCommand
+            (o =>
+            {
+                Drives.Clear();
+                //zwraca kolejkcję dysków ligicznych
+                string[] drives = Directory.GetLogicalDrives();
+
+                foreach (var x in drives)
+                    Drives.Add(x);
+
+            }
+            , null));
+
+
+
+
+
+        //ListBoxDoubleClickEvent
         private ICommand listBoxDClick;
         public ICommand ListBoxDClick => listBoxDClick ?? (listBoxDClick = new RelayCommand(
             o => {
-                if (SelectedFolder.Equals(".."))
+                if (SelectedFolder == "..")
                 {
                     Sciezka = Path.GetDirectoryName(Path.GetDirectoryName(Sciezka));
                     if (!Sciezka.EndsWith("\\"))
@@ -113,7 +127,7 @@ namespace Projekt1MINITC.ViewModel
                         Sciezka += "\\";
                     }
                 }
-                else if (SelectedFolder.StartsWith("<D>"))
+                else 
                 {
                     Sciezka += SelectedFolder.Remove(0, 3) + "\\";
                 }
