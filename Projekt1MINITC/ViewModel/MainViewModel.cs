@@ -30,17 +30,17 @@ namespace Projekt1MINITC.ViewModel
             o =>
             {
                
-                    string pSource = LeftPanel.Sciezka + LeftPanel.SelectedFolder;
-                    string pTarget = RightPanel.Sciezka + LeftPanel.SelectedFolder;
-                    try
-                    {
-                        MainModel.CopyFile(pSource, pTarget);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("ERROR!");
-                    }
-                    RightPanel.Sciezka = RightPanel.Sciezka;
+                string pSource = LeftPanel.Sciezka + LeftPanel.SelectedFolder;
+                string pTarget = RightPanel.Sciezka + LeftPanel.SelectedFolder;
+                try
+                {
+                    MainModel.CopyFile(pSource, pTarget);
+                }
+                catch
+                {
+                  MessageBox.Show("ERROR!");
+                }
+                RightPanel.Sciezka = RightPanel.Sciezka;
                 
                 
             },
